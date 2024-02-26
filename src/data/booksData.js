@@ -4,7 +4,7 @@ export let books = [
      authors : 'Michael Ende',
      year : '1973',
      description: 'Momo, also known as The Grey Gentlemen or The Men in Grey, is a fantasy novel',
-     coverImage: 'bookcovers/MOMO.jpg',
+     coverImage: 'https://en.wikipedia.org/wiki/Momo_%28novel%29#/media/File:Momo_English.jpg',
      memo: 'cassiopeia, p3',
      haveRead: true,
      favorite: true
@@ -14,7 +14,7 @@ export let books = [
     authors : 'Daniel L. Everett',
     year : '2008',
     description: 'Part passionate memoir, part scientific exploration, a life-changing tale set among a small tribe of Amazonian Indians in Brazil that offers a riveting look into the nature of language, thought, and life itself.',
-    coverImage: 'bookcovers/Default_book copy.jpg',
+    coverImage: 'https://en.wikipedia.org/wiki/Momo_%28novel%29#/media/File:Momo_English.jpg',
     memo: 'Life and Language in the Amazonian Jungle',
     haveRead: false,
     favorite:true
