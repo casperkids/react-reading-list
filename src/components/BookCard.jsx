@@ -1,12 +1,14 @@
 import { useState } from "react"
 
-export default function BookCard({ book }) {
+export default function BookCard({ book, togglestatus }) {
 
     // change ReadStatus - Represent the state in memory with useState
     const [haveRead, setHaveReadIcon] = useState(book.haveRead)
+    
     const btnHaveRead  = () => {
-        setHaveReadIcon(!haveRead);
-      }
+    setHaveReadIcon(!haveRead);
+    togglestatus(book.id)
+    }
 
     return (
     <div className="card mb-3" style={{maxWidth: '540px'}}>
@@ -21,7 +23,8 @@ export default function BookCard({ book }) {
                 <p className="card-text">{book.description}</p>
                 <div>
                      <i className={`bi ${haveRead ? "bi-bookmark-check" : "bi-bookmark"}`}></i>  
-                     <button className="statusButton" onClick={btnHaveRead}> {haveRead ? 'Have read it' : "Want to read it"} </button>
+                     <button className="statusButton" onClick={btnHaveRead} >
+                    {haveRead ? 'Have read it' : "Want to read it"} </button>
                 </div>
                 <p className="card-text"><small className="text-body-secondary">{book.year}</small></p>
             </div>

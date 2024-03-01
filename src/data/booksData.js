@@ -7,7 +7,8 @@ export let books = [
      coverImage: 'https://en.wikipedia.org/wiki/Momo_%28novel%29#/media/File:Momo_English.jpg',
      memo: 'cassiopeia, p3',
      haveRead: true,
-     favorite: true
+     favorite: true,
+     id:11
     },
     {
     title : "Don't Sleep, There Are Snakes",
@@ -17,7 +18,8 @@ export let books = [
     coverImage: 'https://en.wikipedia.org/wiki/Momo_%28novel%29#/media/File:Momo_English.jpg',
     memo: 'Life and Language in the Amazonian Jungle',
     haveRead: false,
-    favorite:true
+    favorite:true,
+    id:12
     },
     {
     title : 'Lobo, the King of Currumpaw',
@@ -27,8 +29,8 @@ export let books = [
     coverImage: 'bookcovers/Default_book copy.jpg',
     favorite:true,
     haveRead: false,
-    memo: 'wolf'
-  
+    memo: 'wolf',
+    id:13
     },
     {
     title : 'About Face',
@@ -36,7 +38,8 @@ export let books = [
     year : '2014',
     description: 'The Essentials of Interaction Design ',
     coverImage: 'bookcovers/Default_book copy.jpg',
-    memo: 'The Essentials of Interaction Design'
+    memo: 'The Essentials of Interaction Design',
+    id:14
     },
     {
     title : 'Wilder Mann',
@@ -46,6 +49,7 @@ export let books = [
     coverImage: 'bookcovers/Default_book copy.jpg',
     favorite:true,
     haveRead: true,
-    memo: ''
+    memo: '',
+    id:15
     }
   ]
