@@ -1,4 +1,7 @@
 import { useState } from "react"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faBookmark, faHeart, faHeartCrack } from '@fortawesome/free-solid-svg-icons'; 
+import Badge from "react-bootstrap/Badge"
 
 export default function BookCard({ book, togglestatus }) {
 
@@ -7,6 +10,13 @@ export default function BookCard({ book, togglestatus }) {
     
     const btnHaveRead  = () => {
     setHaveReadIcon(!haveRead);
+    togglestatus(book.id)
+    }
+    // change FavoriteStatus
+    const [favorite, setfavoriteIcon] = useState(book.favorite)
+    
+    const btnfavorite  = () => {
+    setfavoriteIcon(!favorite)
     togglestatus(book.id)
     }
 
@@ -24,11 +34,20 @@ export default function BookCard({ book, togglestatus }) {
             <p>{book.year}</p>
             <p className="card-text">{book.description}</p>
 
+            
+            
+
             <div className="container">
               <div className="row">
-                <div>
-                    <i className={`bi ${haveRead ? "bi-bookmark-check" : "bi-bookmark"}`}></i>  
-                    <button className="statusButton" onClick={btnHaveRead} > {haveRead ? 'Have read it' : "Want to read it"} </button>
+                <div className="d-flex align-items-center">
+                    <FontAwesomeIcon icon={haveRead ? faBookmark : faBookmark } style={{color: haveRead ? "#0096ff" : '#d5d5d5'}} />   
+                    <h5><Badge pill bg="light" text="dark" className="statusButton" onClick={btnHaveRead} > {haveRead ? 'Have read it' : 'Want to read it'}
+                    </Badge> </h5>
+                </div>
+                <div className="d-flex align-items-center">
+                    <FontAwesomeIcon icon = {favorite? faHeart  : faHeartCrack} style={{ color: favorite ? '#ff89d8' : '#d5d5d5' }} />
+                    <h5><Badge pill bg="light" text="dark" className="statusButton" onClick={btnfavorite} > {favorite ? 'Favorite' : 'Unfavorite'}
+                    </Badge> </h5>
                 </div>
               </div>
             </div>
@@ -39,28 +58,9 @@ export default function BookCard({ book, togglestatus }) {
       </div>
     </div>
   );
+
+  
 }
 
 
-    //Original
-    // <div className="card mb-3" style={{maxWidth: '540px'}}>
-    // <div className="row g-0" >
-    //     <div className="col-md-4">
-    //       <img src={book.coverImage} className="img-fluid rounded-start" alt={book.title} />
-    //     </div>
-    //     <div className="col-md-8">
-    //         <div className="card-body">
-    //             <h5 className="card-title">{book.title}</h5>
-    //             <h5>{book.authors}</h5>
-    //             <p className="card-text">{book.description}</p>
-    //             <div>
-    //                  <i className={`bi ${haveRead ? "bi-bookmark-check" : "bi-bookmark"}`}></i>  
-    //                  <button className="statusButton" onClick={btnHaveRead} >
-    //                 {haveRead ? 'Have read it' : "Want to read it"} </button>
-    //             </div>
-    //             <p className="card-text"><small className="text-body-secondary">{book.year}</small></p>
-    //         </div>
-    //     </div>
-    // </div>
-    // </div>
-
+    
