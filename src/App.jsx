@@ -44,7 +44,10 @@ const ApiFavoriteStatus = (key) => {
 };
 
 
-   
+
+
+const totalBooks = books.length + apiBooks.length;
+console.log(totalBooks)
 
 
   //API Libruary
@@ -70,15 +73,16 @@ const ApiFavoriteStatus = (key) => {
       
       <div className="text-bg-light p-3">
         <div className="collection-list">
-            <h3 className="text-center "style={{ paddingBottom: '60px' }}>MY BOOKS</h3>
+            <h3 className="text-center "style={{ paddingBottom: '60px' }}>ALL BOOKS <span class="border border-secondary"> {totalBooks} </span></h3> 
             {books.map(book => (<BookCard book={book} toggleStatus={toggleReadStatus} favoriteStatus={favoriteStatus}  key = {book.id}></BookCard>  ))}
-           
+            {apiBooks.map(work => <ApiBookCard book={work} toggleStatus={ApiToggleReadStatus} favoriteStatus={ApiFavoriteStatus}  key={work.key}></ApiBookCard>)} 
         </div>
+        <hr className="border-top border-secondary"style={{ marginTop: '30px' }} /> 
       </div>
 
       <div className="text-bg-light p-3">
         <div className="collection-list">
-            <h3 className="text-center "style={{ paddingBottom: '60px' }}>MY BOOKS</h3>
+            <h3 className="text-center "style={{ paddingBottom: '60px' }}>API BOOKS</h3>
             {apiBooks.map(work => <ApiBookCard book={work} toggleStatus={ApiToggleReadStatus} favoriteStatus={ApiFavoriteStatus}  key={work.key}></ApiBookCard>)} 
             
         </div>
