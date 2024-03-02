@@ -1,30 +1,30 @@
-import { useState } from "react"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBookmark, faHeart, faHeartCrack } from '@fortawesome/free-solid-svg-icons'; 
 import Badge from "react-bootstrap/Badge"
 
-export default function BookCard({ book, togglestatus }) {
+export default function BookCard({ book, toggleStatus, favoriteStatus }) {
 
-    // change ReadStatus - Represent the state in memory with useState
-    const [haveRead, setHaveReadIcon] = useState(book.haveRead)
+     // change ReadStatus - Represent the state in memory with useState
+    // const [haveRead, setHaveRead] = useState(book.haveRead)
     
-    const btnHaveRead  = () => {
-    setHaveReadIcon(!haveRead);
-    togglestatus(book.id)
-    }
-    // change FavoriteStatus
-    const [favorite, setfavoriteIcon] = useState(book.favorite)
     
-    const btnfavorite  = () => {
-    setfavoriteIcon(!favorite)
-    togglestatus(book.id)
-    }
+    // const btnHaveRead  = () => {
+    // setHaveReadIcon(!haveRead);
+    // togglestatus(book.id)
+    // }
+    // // change FavoriteStatus
+    // const [favorite, setfavoriteIcon] = useState(book.favorite)
+    
+    // const btnfavorite  = () => {
+    // setfavoriteIcon(!favorite)
+    // togglestatus(book.id)
+    // }
 
     return (
       <div style={{ maxWidth: '700px' }} className="container card mb-3">
       <div className="row g-0">
         <div className="col-md-4 d-flex align-items-center">
-          <img src={book.coverImage} alt={book.title} style={{ maxWidth: '80%' }} />
+          <img src={book.coverImage} alt={book.id} style={{ maxWidth: '80%' }} />
         </div>
 
         <div className="col-md-8">
@@ -40,13 +40,13 @@ export default function BookCard({ book, togglestatus }) {
             <div className="container">
               <div className="row">
                 <div className="d-flex align-items-center">
-                    <FontAwesomeIcon icon={haveRead ? faBookmark : faBookmark } style={{color: haveRead ? "#0096ff" : '#d5d5d5'}} />   
-                    <h5><Badge pill bg="light" text="dark" className="statusButton" onClick={btnHaveRead} > {haveRead ? 'Have read it' : 'Want to read it'}
+                    <FontAwesomeIcon icon={book.haveRead ? faBookmark : faBookmark } style={{color: book.haveRead ? "#0096ff" : '#d5d5d5'}} />   
+                    <h5><Badge pill bg="light" text="dark" className="statusButton" onClick={() => {toggleStatus(book.id)}}  > {book.haveRead ? 'Have read it' : 'Want to read it'}
                     </Badge> </h5>
                 </div>
                 <div className="d-flex align-items-center">
-                    <FontAwesomeIcon icon = {favorite? faHeart  : faHeartCrack} style={{ color: favorite ? '#ff89d8' : '#d5d5d5' }} />
-                    <h5><Badge pill bg="light" text="dark" className="statusButton" onClick={btnfavorite} > {favorite ? 'Favorite' : 'Unfavorite'}
+                    <FontAwesomeIcon icon = {book.favorite? faHeart  : faHeartCrack} style={{ color: book.favorite ? '#ff89d8' : '#d5d5d5' }} />
+                    <h5><Badge pill bg="light" text="dark" className="statusButton" onClick={() => {favoriteStatus(book.id)}} > {book.favorite ? 'Favorite' : 'Unfavorite'}
                     </Badge> </h5>
                 </div>
               </div>

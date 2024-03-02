@@ -11,7 +11,7 @@ import { faBookOpenReader } from '@fortawesome/free-solid-svg-icons';
 function App() {
 
   const [books, setBooks] = useState(booksData)
-  const [ apiBooks, setApiBook ] = useState([])
+  const [apiBooks, setApiBooks ] = useState([])
   //add function to change state of book(haveRead: true or false)
   const toggleReadStatus = (id) => {
   let updatedBooks = books.map(book => {
@@ -20,20 +20,40 @@ function App() {
   setBooks(updatedBooks)
   }
   //add function to change Favourite of book(favorite: true or false)
-  const favouriteStatus = (id) => {
+  const favoriteStatus = (id) => {
     let updatedBooks = books.map(book => {
-      return book.id === id ? {...book, favourite: !book.favourite} : book
+      return book.id === id ? {...book, favorite: !book.favorite} : book
     })
    setBooks(updatedBooks)
    }
+   
+// Add function to change state of API book (haveRead: true or false)
+const ApiToggleReadStatus = (key) => {
+  let updatedBooks = apiBooks.map((book, index) => {
+    return book.key === key ? {...book, haveRead: !book.haveRead} : book;
+  });
+  setApiBooks(updatedBooks);
+};
+
+// Add function to change Favorite of API book (favorite: true or false)
+const ApiFavoriteStatus = (key) => {
+  let updatedBooks = apiBooks.map((book, index) => {
+    return book.key === key ? {...book, favorite: !book.favorite} : book;
+  });
+  setApiBooks(updatedBooks);
+};
+
+
+   
+
 
   //API Libruary
   useEffect(() =>{
    const getBooksData = async () =>{
     let response = await fetch('http://openlibrary.org/subjects/art.json')
     let data = await response.json()
-    console.log (data.works)
-    setApiBook(data.works)
+    //console.log (data.works)
+    setApiBooks(data.works)
    }
    getBooksData()
 
@@ -51,18 +71,20 @@ function App() {
       <div className="text-bg-light p-3">
         <div className="collection-list">
             <h3 className="text-center "style={{ paddingBottom: '60px' }}>MY BOOKS</h3>
-            {books.map(book => (<BookCard book={book} toggleStatus={toggleReadStatus} key = {book.id}></BookCard>  ))}
+            {books.map(book => (<BookCard book={book} toggleStatus={toggleReadStatus} favoriteStatus={favoriteStatus}  key = {book.id}></BookCard>  ))}
+           
+        </div>
+      </div>
+
+      <div className="text-bg-light p-3">
+        <div className="collection-list">
+            <h3 className="text-center "style={{ paddingBottom: '60px' }}>MY BOOKS</h3>
+            {apiBooks.map(work => <ApiBookCard book={work} toggleStatus={ApiToggleReadStatus} favoriteStatus={ApiFavoriteStatus}  key={work.key}></ApiBookCard>)} 
+            
         </div>
       </div>
       
-      <div>
-        <h2>ALL BOOKS</h2>
-       {books.map(book => (<BookCard book={book} toggleStatus={toggleReadStatus} key = {book.id}></BookCard>  ))}
-      </div>
-      <div className="collection-list">
-        <h2>API BOOKS</h2>
-       {apiBooks.map(work => <ApiBookCard book={work} key={work.ia}/>)} 
-      </div>
+      
     </>
   )
 }
