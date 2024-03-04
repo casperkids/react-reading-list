@@ -27,7 +27,7 @@ export let books = [
     year : '1898',
     description: 'Based on the non-fiction account by Seton, Lobo is an 1890s wolf from an account by Seton who was a naturalist, and was a bounty hunter in the real-life story. Filming took place in Sedona, Arizona.',
     coverImage: 'src/bookpics/Lobo, the King of Currumpaw.png',
-    favorite:true,
+    favorite:false,
     haveRead: false,
     memo: 'wolf',
     id:13
@@ -38,6 +38,7 @@ export let books = [
     year : '2014',
     description: 'The Essentials of Interaction Design ',
     coverImage: 'src/bookpics/About Face.png',
+    haveRead: false,
     memo: 'The Essentials of Interaction Design',
     id:14
     },
@@ -48,7 +49,7 @@ export let books = [
     description: 'The transformation of man into beast is a central aspect of traditional pagan rituals that are centuries old and which celebrate the seasonal cycle, fertility, life and death.',
     coverImage: 'src/bookpics/Wilder Mann.jpg',
     favorite:true,
-    haveRead: true,
+    haveRead: false,
     memo: '',
     id:15
     }
