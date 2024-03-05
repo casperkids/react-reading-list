@@ -21,34 +21,18 @@ export default function BookCard({ book, apiBook, toggleStatus, favoriteStatus }
             <div className="container">
               <div className="row">
               <div className="d-flex align-items-center">
-         <FontAwesomeIcon icon={book.haveRead ? faBookmark : faBookmark } style={{color: book.haveRead ? "#0096ff" : '#d5d5d5'}} />  
-    <h5>
-        <Badge pill bg="light" text="dark" className="statusButton" onClick={() => {
-            if (book.id){
-              toggleStatus(book.id)
-            } else {
-              toggleStatus(apiBook.id)
-            }
-        }}>
-            {apiBook ? (apiBook.haveRead  ? 'Have read it' : 'Want to read it') : (book.haveRead  ? 'Have read it' : 'Want to read it')}
-        </Badge>
-    </h5>
-</div>
-
-                {/* <div className="d-flex align-items-center">
-                  <FontAwesomeIcon icon={apiBook ? (apiBook.favorite ? faHeart : faHeartCrack) : (book.favorite ? faHeart : faHeartCrack)} style={{ color: apiBook ? (apiBook.favorite ? '#ff89d8' : '#d5d5d5') : (book.favorite ? '#ff89d8' : '#d5d5d5') }} />
-                  <h5>
-                    <Badge pill bg="light" text="dark" className="statusButton" onClick={() => {
-                      if (apiBook.id) {
-                        favoriteStatus(apiBook.id);
-                      } else if (book.id) {
-                        favoriteStatus(book.id);
-                      }
-                    }}>
-                      {apiBook ? (apiBook.favorite ? 'Favorite' : 'Unfavorite') : (book.favorite ? 'Favorite' : 'Unfavorite')}
-                    </Badge>
-                  </h5>
-                </div> */}
+               <FontAwesomeIcon icon={book.haveRead ? faBookmark : faBookmark } style={{color: book.haveRead ? "#0096ff" : '#d5d5d5'}} />  
+               <h5> <Badge pill bg="light" text="dark" className="statusButton" onClick={() => {
+                if (book.id){
+                   toggleStatus(book.id)
+                } else {
+                   toggleStatus(apiBook.id)
+                 }
+                 }}>
+                 {apiBook ? (apiBook.haveRead  ? 'Have read it' : 'Want to read it') : (book.haveRead  ? 'Have read it' : 'Want to read it')}</Badge>
+                </h5>
+            </div>
+            
               </div>
             </div>
             <div className="w-100"></div>

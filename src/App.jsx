@@ -41,55 +41,6 @@ function App() {
   setApiBooks(updatedBooks);
 };
 
-// Add function to change Favorite of API book (favorite: true or false)
-const apiFavoriteStatus = (key) => {
-  let updatedBooks = apiBooks.map((book) => {
-    return book.key === key ? {...book, favorite: !book.favorite} : book;
-  })
-  setApiBooks(updatedBooks);
-}
-
-// // TOTAL BOOKS
-// const totalBooks = books.length + apiBooks.length;
-// //console.log(totalBooks)
-
-// // READBOOKS　SUM
-// useEffect(() => {
-//   const haveReadSum = books.filter(item => item.haveRead=== true).length
-//   console.log("Books_read_sum", haveReadSum); 
-//   setHaveReadSum(haveReadSum);
-// }, [books]);
-
-// useEffect(() => {
-//   const apiHaveReadSum = apiBooks.filter(item => item.haveRead=== true).length
-//   console.log("APIBooks_read_sum", apiHaveReadSum); 
-//   setaipHaveReadSum(apiHaveReadSum);  
-// }, [apiBooks]);
-
-// // FavBOOKS　SUM
-// useEffect(() => {
-//   const favSum = books.filter(item => item.favorite=== true).length
-//   console.log("Books_fav_sum", favSum); 
-//   setFavSum(favSum);
-// }, [books]);
-
-// useEffect(() => {
-//   const apiFavSum = apiBooks.filter(item => item.favorite=== true).length
-//   console.log("APIBooks_fav_sum", apiFavSum); 
-//   setApiFavSum(apiFavSum);  
-// }, [apiBooks]);
-
-// //FILTER Favorite BOOKS
-// const getFavoriteBooks = (books) => {
-//   return books.filter(book => book.favorite === true)
-// };
-
-// const getApiFavoriteBooks = (apiBooks) => {
-//   return apiBooks.filter(apiBook => apiBook.favorite === true)
-// };
-
-
-
   //API Libruary
   useEffect(() =>{
    const getBooksData = async () =>{
@@ -144,21 +95,6 @@ const apiFavoriteStatus = (key) => {
             {apiBooks.map(apiBook => (<BookCard book={apiBook} toggleStatus={apiToggleReadStatus} favoriteStatus={apiFavoriteStatus} key = {apiBook.id}></BookCard>  ))}
         </div>
         <hr className="border-top border-secondary"style={{ marginTop: '30px' }} /> 
-      </div>
-
-      <div className="text-bg-light p-3">
-        <div className="collection-list">
-            <h3 className="text-center "style={{ paddingBottom: '60px' }}>FAVORITE BOOK LIST</h3>
-            {/* {getFavoriteBooks(books).map(book => (<li key={book.id}>{book.title}</li>))} */}
-            {/* {getApiFavoriteBooks(apiBooks).map(apiBook => (<li key={apiBook.key}>{apiBook.title}</li>))} */}
-        </div>
-      </div>
-
-      <div className="text-bg-light p-3">
-        <div className="collection-list">
-            <h3 className="text-center "style={{ paddingBottom: '60px' }}>API BOOKS</h3>
-            {/* {apiBooks.map(work => <ApiBookCard book={work} toggleStatus={ApiToggleReadStatus} favoriteStatus={ApiFavoriteStatus}  key={work.key}></ApiBookCard>)}        */}
-        </div>
       </div>
       
       
