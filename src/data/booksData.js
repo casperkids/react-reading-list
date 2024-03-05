@@ -7,7 +7,7 @@ export let books = [
      coverImage: 'src/bookpics/MOMO.jpg',
      memo: 'cassiopeia, p3',
      haveRead: true,
-     favorite: true,
+     favorite:false,
      id:11
     },
     {
@@ -39,6 +39,7 @@ export let books = [
     description: 'The Essentials of Interaction Design ',
     coverImage: 'src/bookpics/About Face.png',
     haveRead: false,
+    favorite:false,
     memo: 'The Essentials of Interaction Design',
     id:14
     },
@@ -48,7 +49,7 @@ export let books = [
     year : '2012',
     description: 'The transformation of man into beast is a central aspect of traditional pagan rituals that are centuries old and which celebrate the seasonal cycle, fertility, life and death.',
     coverImage: 'src/bookpics/Wilder Mann.jpg',
-    favorite:true,
+    favorite:false,
     haveRead: false,
     memo: '',
     id:15
