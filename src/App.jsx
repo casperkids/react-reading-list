@@ -1,3 +1,4 @@
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import { useEffect, useState } from 'react'
 import { books as booksData} from "./data/booksData.js"
 import BookCard from './components/BookCard.jsx'
@@ -5,12 +6,18 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBookOpenReader, faBookmark, faHeart,faArrowUp } from '@fortawesome/free-solid-svg-icons'; 
+import Home from './pages/Home.jsx'
+// import Art from './pages/Art.jsx'
+// import Physics from './pages/Physics.jsx'
+// import Archtecture from './pages/Architecture.jsx'
 
 
 function App() {
 
   const [books, setBooks] = useState(booksData);
   const [apiBooksData, setApiBooksData] = useState([]);
+  const [physicsBookData, setPhysicsBookData] = useState([]);
+  const [filmBookData, setfilmBookData] = useState([]);
   const [favSum, setFavSum] = useState(0)
   const [readSum, setReadSum] = useState(0)
 
@@ -30,25 +37,43 @@ function App() {
    setBooks(updatedBooks)
    }
   
+  const mapBookData = (books) => {
+    return books.map(book => ({
+      id: book.key,
+      title: book.title,
+      authors: book.authors[0]?.name,
+      ear: book.first_publish_year,
+      coverImage: `https://covers.openlibrary.org/b/id/${book.cover_id}-M.jpg`,
+      description: "no description",
+      haveRead: false,
+      favorite: false,
+      memo: ""
+    }))
+  }
 
   useEffect(() => {
      const getBooksData = async () => {
-       let response = await fetch('http://openlibrary.org/subjects/art.json');
+       let response = await fetch('http://openlibrary.org/subjects/art.json')
        let data = await response.json();
-       // Assign value to apiBooksData
-       let apiBooksData = data.works.map(book => ({
-         id: book.key,
-         title: book.title,
-         authors: book.authors[0]?.name,
-         year: book.first_publish_year,
-         coverImage: `https://covers.openlibrary.org/b/id/${book.cover_id}-M.jpg`,
-         description: "no description",
-         haveRead: false,
-         favorite: false,
-         memo: ""
-       }));
+       setApiBooksData(data.works)
+       // fetch physics
+       let responsePhysics = await fetch('http://openlibrary.org/subjects/physics.json')
+       let physicsData= await responsePhysics.json();
+       setPhysicsBookData(physicsData.works)
+       // fetch physics
+       let responseFilm = await fetch('http://openlibrary.org/subjects/film.json')
+       let filmData= await responseFilm.json();
+       setPhysicsBookData(filmData.works)
+
+
+      // Assign value to apiBooksData
+      let apiBooksData = mapBookData(data.works)
+      let physicsBookData =mapBookData(physicsData.works)
+      let filmBookData =mapBookData(filmData.works)
+
+
       // concat the transformed api books, to the local books, and update the origina book list
-      let allBooksCombined = booksData.concat(...apiBooksData);
+      let allBooksCombined = booksData.concat(apiBooksData, physicsBookData, filmBookData)
       setBooks(allBooksCombined)
      };
      getBooksData()
@@ -56,19 +81,18 @@ function App() {
 
   useEffect(() => {
       const calculateFavSum = () => {
-        const favSum = books.filter(item => item.favorite === true).length;
-        setFavSum(favSum);
+        const favSum = books.filter(item => item.favorite === true).length
+        setFavSum(favSum)
       };
-      calculateFavSum();
-    }, [books]);
-
-  useEffect(() => {
+      calculateFavSum()
+      
       const calculateReadSum = () => {
-        const readSum = books.filter(item => item.haveRead === true).length;
-        setReadSum(readSum);
+        const readSum = books.filter(item => item.haveRead === true).length
+        setReadSum(readSum)
       };
-      calculateReadSum();
-    }, [books]);
+      calculateReadSum()
+    }, [books])
+
   
    const totalBooks = books.length
   
@@ -80,47 +104,21 @@ function App() {
   }; 
   
 
-
-
   return (
-    <>
-        
-      <div className="p-5 text-center bg-body-tertiary" >
-         <h2 className="mb-6"><FontAwesomeIcon icon={faBookOpenReader} /></h2>
-         <h1 className="mb-3">MY BOOK LIBRUARY APP</h1> 
-          <div className="container">
-              <div className="row">
-                <div className="col-sm">
-                  <FontAwesomeIcon icon={faBookmark} style={{color: "#0096ff",}}/> Read Books {readSum}
-                </div>
-                <div className="col-sm">
-                  Total Books {totalBooks}
-                </div>
-                <div className="col-sm">
-                  <FontAwesomeIcon icon={faHeart} style={{color: "#ff89d8",}}/> Favorite Books {favSum}
-                </div>
-                <hr className="border-top border-secondary"style={{ marginTop: '30px' }} /> 
-             </div>
-          </div>
-      </div>       
-      <div className="text-bg-light p-3">
-        <div className="collection-list">
-            <h3 className="text-center "style={{ paddingBottom: '60px' }}>ALL BOOKS</h3> 
-            {books.map(book => (<BookCard book={book} toggleStatus={toggleReadStatus} favoriteStatus={favoriteStatus}  key = {book.id}></BookCard>  ))}
-            {books.map(book => (<BookCard book={book} toggleStatus={toggleReadStatus} favoriteStatus={favoriteStatus}  key = {book.id}></BookCard>  ))} 
-        </div>
-        <button type="button" className="btn btn-danger btn-floating btn-lg" id="btn-back-to-top" onClick={scrollToTop} style={{ float: 'right' }}>
-         <FontAwesomeIcon icon={faArrowUp} />
-        </button>
-        <hr className="border-top border-secondary"style={{ marginTop: '50px' }} /> 
-      </div>
-
-
-
-   
-      
-      
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<Home />} >
+          {/* <Route path='art' element={<Art artBooks={artBooks}/>} />
+          <Route path='physics' element={<Physics physicsBooks={physicsBooks} />} />
+          <Route path='archtecture' element={<Archtecture archtectureBooks={archtectureBooks} />} /> */}
+        </Route>
+        <Route path='*' element={
+          <div>
+            <h1>This is * route</h1>
+          </div> 
+        } />
+      </Routes>
+    </BrowserRouter>
   )
 }
 
