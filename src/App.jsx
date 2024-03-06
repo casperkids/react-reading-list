@@ -10,58 +10,53 @@ import { faBookOpenReader, faBookmark, faHeart } from '@fortawesome/free-solid-s
 
 function App() {
 
-  const [books, setBooks] = useState(booksData)
-  const [apiBooks, setApiBooks ] = useState([])
-  const [haveReadSum, setHaveReadSum] = useState(0)
-  const [apiHaveReadSum, setaipHaveReadSum] = useState(0)
-  const [favSum, setFavSum] = useState(0)
-  const [apiFavSum, setApiFavSum] = useState(0)
+  const [books, setBooks] = useState(booksData);
+  const [apiBooksData, setApiBooksData] = useState([]);
+  // const [haveReadSum, setHaveReadSum] = useState(0)
+  // const [favSum, setFavSum] = useState(0)
+
 
   //add function to change state of book(haveRead: true or false)
   const toggleReadStatus = (id) => {
-  let updatedBooks = books.map(book => {
+   let updatedBooks = books.map(book => {
     return book.id === id ? {...book, haveRead: !book.haveRead} : book
   })
   setBooks(updatedBooks)
   }
  
-  //add function to change Favourite of book(favorite: true or false)
-  const favoriteStatus = (id) => {
-    let updatedBooks = books.map(book => {
-      return book.id === id ? {...book, favorite: !book.favorite} : book
-    })
-   setBooks(updatedBooks)
-   }
+  // // //add function to change Favourite of book(favorite: true or false)
+  // const favoriteStatus = (id) => {
+  //   let updatedBooks = books.map(book => {
+  //     return book.id === id ? {...book, favorite: !book.favorite} : book
+  //   })
+  //  setBooks(updatedBooks)
+  //  }
    
-// Add function to change state of API book (haveRead: true or false)
-  const apiToggleReadStatus = (key) => {
-    let updatedBooks = apiBooks.map((book) => {
-     return book.key === key ? {...book, haveRead: !book.haveRead} : book;
-   });
-  setApiBooks(updatedBooks);
-};
 
-  //API Libruary
-  useEffect(() =>{
-   const getBooksData = async () =>{
-    let response = await fetch('http://openlibrary.org/subjects/art.json')
-    let data = await response.json()
-    const apiBooksData = data.works.map(book => ({
-      id: book.key,
-      title: book.title,
-      authors: book.authors[0]?.name ,
-      year: book.first_publish_year ,
-      coverImage: `https://covers.openlibrary.org/b/id/${book.cover_id}-M.jpg`,
-      description: "no description",
-      haveRead: false,
-      favorite: false,
-      memo: ""
-    }));
-    setApiBooks(apiBooksData)
-   }
-   getBooksData()
+  
 
-}, [])
+   useEffect(() => {
+     const getBooksData = async () => {
+       let response = await fetch('http://openlibrary.org/subjects/art.json');
+       let data = await response.json();
+       // Assign value to apiBooksData
+       let apiBooksData = data.works.map(book => ({
+         id: book.key,
+         title: book.title,
+         authors: book.authors[0]?.name,
+         year: book.first_publish_year,
+         coverImage: `https://covers.openlibrary.org/b/id/${book.cover_id}-M.jpg`,
+         description: "no description",
+         haveRead: false,
+         favorite: false,
+         memo: ""
+       }));
+      // concat the transformed api books, to the local books, and update the origina book list
+      let allBooksCombined = booksData.concat(...apiBooksData);
+      setBooks(allBooksCombined);
+     };
+     getBooksData();
+   }, []);
 
   return (
     <>
@@ -91,8 +86,8 @@ function App() {
       <div className="text-bg-light p-3">
         <div className="collection-list">
             <h3 className="text-center "style={{ paddingBottom: '60px' }}>ALL BOOKS </h3> 
-            {books.map(book => (<BookCard book={book} toggleStatus={toggleReadStatus} favoriteStatus={favoriteStatus}  key = {book.id}></BookCard>  ))}
-            {apiBooks.map(apiBook => (<BookCard book={apiBook} toggleStatus={apiToggleReadStatus} favoriteStatus={apiFavoriteStatus} key = {apiBook.id}></BookCard>  ))}
+            {books.map(book => (<BookCard book={book} toggleStatus={toggleReadStatus}  key = {book.id}></BookCard>  ))}
+            {/* {apiBooks.map(apiBook => (<BookCard book={apiBook} toggleStatus={apiToggleReadStatus} key = {apiBook.id}></BookCard>  ))} */}
         </div>
         <hr className="border-top border-secondary"style={{ marginTop: '30px' }} /> 
       </div>

@@ -2,14 +2,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBookmark, faHeart, faHeartCrack } from '@fortawesome/free-solid-svg-icons'; 
 import Badge from "react-bootstrap/Badge"
 
-export default function BookCard({ book, apiBook, toggleStatus, favoriteStatus }) {
+export default function BookCard({ book, toggleStatus, favoriteStatus }) {
 
   return (
     <div style={{ maxWidth: '700px' }} className="container card mb-3">
       <div className="row g-0">
         <div className="col-md-4 d-flex align-items-center">
-          <img src={book ? book.coverImage : apiBook.coverImage} alt={book ? book.id : apiBook.id} style={{ maxWidth: '80%' }} />
-        </div>
+        <img src={book.coverImage} alt={book.id} style={{ maxWidth: '80%' }} />
 
         <div className="col-md-8">
           <div className="card-body px-2">
@@ -20,18 +19,11 @@ export default function BookCard({ book, apiBook, toggleStatus, favoriteStatus }
 
             <div className="container">
               <div className="row">
-              <div className="d-flex align-items-center">
-               <FontAwesomeIcon icon={book.haveRead ? faBookmark : faBookmark } style={{color: book.haveRead ? "#0096ff" : '#d5d5d5'}} />  
-               <h5> <Badge pill bg="light" text="dark" className="statusButton" onClick={() => {
-                if (book.id){
-                   toggleStatus(book.id)
-                } else {
-                   toggleStatus(apiBook.id)
-                 }
-                 }}>
-                 {apiBook ? (apiBook.haveRead  ? 'Have read it' : 'Want to read it') : (book.haveRead  ? 'Have read it' : 'Want to read it')}</Badge>
-                </h5>
-            </div>
+                <div className="d-flex align-items-center">
+                    <FontAwesomeIcon icon={book.haveRead ? faBookmark : faBookmark } style={{color: book.haveRead ? "#0096ff" : '#d5d5d5'}} />   
+                    <h5><Badge pill bg="light" text="dark" className="statusButton" onClick={() => {toggleStatus(book.id)}}  > {book.haveRead ? 'Have read it' : 'Want to read it'}
+                    </Badge> </h5>
+                </div>
             
               </div>
             </div>
@@ -40,6 +32,7 @@ export default function BookCard({ book, apiBook, toggleStatus, favoriteStatus }
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 }
