@@ -41,6 +41,13 @@ function App() {
   setApiBooks(updatedBooks);
 };
 
+const apiFavoriteStatus = (key) => {
+  let updatedBooks = apiBooks.map(book => {
+    return book.key === key ? {...book, favorite: !book.favorite} : book
+  })
+  setApiBooks(updatedBooks)
+ }
+
   //API Libruary
   useEffect(() =>{
    const getBooksData = async () =>{
