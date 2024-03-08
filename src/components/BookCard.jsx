@@ -53,7 +53,7 @@ BookCard.propTypes = {
       description:  PropTypes.string.isRequired,
       coverImage:  PropTypes.string.isRequired,
       haveRead:  PropTypes.bool.isRequired,
-      id: PropTypes.string.isRequired,
+      id: PropTypes.number.isRequired,
   }),
   toggleStatus: PropTypes.func.isRequired,
   favoriteStatus: PropTypes.func.isRequired

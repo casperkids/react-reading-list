@@ -9,15 +9,15 @@ import { faBookOpenReader, faBookmark, faHeart,faArrowUp } from '@fortawesome/fr
 import Home from './pages/Home.jsx'
 import Art from './pages/Art.jsx'
 // import Physics from './pages/Physics.jsx'
-// import Archtecture from './pages/Architecture.jsx'
+
 
 
 function App() {
 
   const [books, setBooks] = useState(booksData);
   const [artBooks, setArtBooks] = useState([]);
-  const [PhysicsBookData, setPhysicsBookData] = useState([]);
-  const [filmData, setFilmBookData] = useState([]);
+  const [PhysicsBook, setPhysicsBookData] = useState([]);
+  const [filmBooks, setFilmBookData] = useState([]);
   // const [favSum, setFavSum] = useState(0)
   // const [readSum, setReadSum] = useState(0)
 
@@ -39,7 +39,7 @@ function App() {
   
   const mapBookData = (books) => {
     return books.map(book => ({
-      id: book.key,
+      id: book.key, 
       title: book.title,
       authors: book.authors[0]?.name,
       year: book.first_publish_year?.toString() || "",
@@ -110,8 +110,8 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<Home books={books} toggleStatus={toggleReadStatus} favoriteStatus={favoriteStatus} />} />
-        <Route path='art' element={<Art ArtBooks={artBooks} toggleReadStatus={toggleReadStatus} favoriteStatus={favoriteStatus}  />} />
-      
+        <Route path='art' element={<Art artBooks={artBooks} toggleStatus={toggleReadStatus} favoriteStatus={favoriteStatus}  />} />
+        {/* <Route path='physics' element={<Physics physicsBooks={PhysicsBook} books={books} toggleStatus={toggleReadStatus} favoriteStatus={favoriteStatus} />} /> */}
         <Route path='*' element={
           <div>
             <h1>This is * route</h1>
