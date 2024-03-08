@@ -1,8 +1,12 @@
+import PropTypes  from 'prop-types'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBookmark, faHeart, faHeartCrack } from '@fortawesome/free-solid-svg-icons'; 
 import Badge from "react-bootstrap/Badge"
 
 export default function BookCard({ book, toggleStatus, favoriteStatus }) {
+
+  // const authors = Array.isArray(book.authors) ? book.authors.join(', ') : book.authors
+
 
   return (
     <div style={{ maxWidth: '700px' }} className="container card mb-3">
@@ -15,6 +19,7 @@ export default function BookCard({ book, toggleStatus, favoriteStatus }) {
         <div className="card-body px-2">
           <h3 className="card-title">{book.title}</h3>
           <h5>{book.authors}</h5>
+          {/* <h5>{authors}</h5> */}
           <p>{book.year}</p>
           <p className="card-text">{book.description}</p>
            <div className="container">
@@ -32,10 +37,24 @@ export default function BookCard({ book, toggleStatus, favoriteStatus }) {
             </div>
           </div>
             <div className="w-100"></div>
-            <div className="card-footer w-100 text-muted">{book.memo}</div>
+            <div className="card-footer w-100 text-muted">{book.id}</div>
         </div>
       </div>
     </div>
     </div>
 );
+}
+
+BookCard.propTypes = {
+  book: PropTypes.shape({
+      title: PropTypes.string.isRequired,
+      authors: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]).isRequired, 
+      year:  PropTypes.string.isRequired,
+      description:  PropTypes.string.isRequired,
+      coverImage:  PropTypes.string.isRequired,
+      haveRead:  PropTypes.bool.isRequired,
+      id: PropTypes.string.isRequired,
+  }),
+  toggleStatus: PropTypes.func.isRequired,
+  favoriteStatus: PropTypes.func.isRequired
 }
