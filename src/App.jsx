@@ -24,7 +24,7 @@ function App() {
   //add function to change state of book(haveRead: true or false)
   const toggleReadStatus = (id) => {
     let updatedBooks = books.map(book => {
-      return book.id === id ? {...book, haveRead: !book.haveRead} : book
+      return book.id.toString() === id ? {...book, haveRead: !book.haveRead} : book
     });
     setBooks(updatedBooks);
   }
@@ -32,14 +32,14 @@ function App() {
   // //add function to change Favourite of book(favorite: true or false)
   const favoriteStatus = (id) => {
     let updatedBooks = books.map(book => {
-      return book.id === id ? {...book, favorite: !book.favorite} : book
+      return book.id.toString() === id ? {...book, favorite: !book.favorite} : book
     })
    setBooks(updatedBooks)
    }
   
   const mapBookData = (books) => {
     return books.map(book => ({
-      id: book.key, 
+      id: (book.id && book.id.toString()) || '',   
       title: book.title,
       authors: book.authors[0]?.name,
       year: book.first_publish_year?.toString() || "",
@@ -57,25 +57,27 @@ function App() {
      const getBooksData = async () => {
        let response = await fetch('http://openlibrary.org/subjects/art.json')
        let data = await response.json();
-       setArtBooks(data.works)
+       let artBooksData = mapBookData(data.works)
+       setArtBooks(artBooksData)
+      //  setArtBooks(data.works)
        // fetch physics
        let responsePhysics = await fetch('http://openlibrary.org/subjects/physics.json')
-       let physicsData= await responsePhysics.json();
+       let physicsData= await responsePhysics.json()
        setPhysicsBookData(physicsData.works)
-       // fetch physics
+       // fetch film
        let responseFilm = await fetch('http://openlibrary.org/subjects/film.json')
-       let filmData= await responseFilm.json();
+       let filmData= await responseFilm.json()
        setFilmBookData(filmData.works)
 
 
       // Assign value to apiBooksData
-      let ArtBooks = mapBookData(data.works)
-      let PhysicsBook =mapBookData(physicsData.works)
-      let FilmBook =mapBookData(filmData.works)
+      let artBooks = mapBookData(data.works)
+      let physicsBook =mapBookData(physicsData.works)
+      let filmBook =mapBookData(filmData.works)
 
 
       // concat the transformed api books, to the local books, and update the origina book list
-      let allBooksCombined = booksData.concat(ArtBooks, PhysicsBook, FilmBook)
+      let allBooksCombined = booksData.concat(artBooksData, physicsBook, filmBook)
       setBooks(allBooksCombined)
      };
      getBooksData()
@@ -110,7 +112,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<Home books={books} toggleStatus={toggleReadStatus} favoriteStatus={favoriteStatus} />} />
-        <Route path='art' element={<Art artBooks={artBooks} toggleStatus={toggleReadStatus} favoriteStatus={favoriteStatus}  />} />
+        <Route path='art' element={<Art artBooks={artBooks} toggleStatus={toggleReadStatus} favoriteStatus={favoriteStatus} />} />
         {/* <Route path='physics' element={<Physics physicsBooks={PhysicsBook} books={books} toggleStatus={toggleReadStatus} favoriteStatus={favoriteStatus} />} /> */}
         <Route path='*' element={
           <div>

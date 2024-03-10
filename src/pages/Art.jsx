@@ -1,9 +1,9 @@
-import { Link } from 'react-router-dom'
+import { Link, Outlet } from 'react-router-dom'
 import BookCard from '../components/BookCard.jsx'
 
-const Art = ({ artBooks, toggleStatus, favoriteStatus }) => {
-    console.log(artBooks);
- 
+const Art = ({ artBooks, toggleStatus, favoriteStatus }) => { 
+    
+    console.log(toggleStatus, favoriteStatus)
     return (
         <>
             <div>
@@ -15,10 +15,11 @@ const Art = ({ artBooks, toggleStatus, favoriteStatus }) => {
                 </Link>
                 <h1>ART BOOKS</h1>
             <div className="collection-list" >
-                {artBooks.map(book => (<BookCard key={String(book.id)} book={book} toggleStatus={toggleStatus} favoriteStatus={favoriteStatus} />
+                {artBooks.map(book => (<BookCard toggleStatus={toggleStatus} favoriteStatus={favoriteStatus} key={`${book.id.toString()}-${book.title}`} book={book}/>
             ))}
             </div>
         </div> 
+        <Outlet />
         </>
     );
 };
