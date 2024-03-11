@@ -40,9 +40,9 @@ function App() {
    setBooks(updatedBooks)
    }
   
-  const mapBookData = (books) => {
+  const mapBookData = (books,categoryBooks) => {
     return books.map(book => ({
-      id: (book.id && book.id.toString()) || '',   
+      id: categoryBooks+'_'+book.cover_id,   
       title: book.title,
       authors: book.authors[0]?.name,
       year: book.first_publish_year?.toString() || "",
@@ -50,7 +50,8 @@ function App() {
       description: "no description",
       haveRead: false,
       favorite: false,
-      memo: ""
+      memo: "",
+      lendingIdentifer : book.lending_identifier,
     }))
   }
 
@@ -60,27 +61,27 @@ function App() {
      const getBooksData = async () => {
        let response = await fetch('http://openlibrary.org/subjects/art.json')
        let data = await response.json();
-       let artBooksData = mapBookData(data.works)
-       setArtBooks(artBooksData)
 
        // fetch physics
        let responsePhysics = await fetch('http://openlibrary.org/subjects/physics.json')
        let physicsData= await responsePhysics.json()
-       setPhysicsBookData(physicsData.works)
+       
        // fetch film
        let responseFilm = await fetch('http://openlibrary.org/subjects/film.json')
        let filmData= await responseFilm.json()
-       setFilmBookData(filmData.works)
-
-
+       
       // Assign value to apiBooksData
-      let artBooks = mapBookData(data.works)
-      let physicsBook =mapBookData(physicsData.works)
-      let filmBook =mapBookData(filmData.works)
+      let artBooks = mapBookData(data.works,'art')
+      let physicsBooks =mapBookData(physicsData.works,'physics')
+      let filmBooks =mapBookData(filmData.works,'film')
 
+      setArtBooks(artBooks)
+      setPhysicsBookData(physicsBooks)
+      setFilmBookData(filmBooks)
 
+      console.log("artBooks", artBooks)
       // concat the transformed api books, to the local books, and update the origina book list
-      let allBooksCombined = booksData.concat(artBooksData, physicsBook, filmBook)
+      let allBooksCombined = booksData.concat(artBooks, physicsBooks, filmBooks)
       setBooks(allBooksCombined)
      };
      getBooksData()
@@ -118,7 +119,7 @@ function App() {
         <Route path='/' element={<SharedLayout />} >
           <Route index element={<Home books={books} toggleStatus={toggleReadStatus} favoriteStatus={favoriteStatus} />} />
           <Route path='art' element={<Art artBooks={artBooks} toggleStatus={toggleReadStatus} favoriteStatus={favoriteStatus} />} />
-          <Route path='art/:bookId' element={<SingleBook/>}/>
+          <Route path='art/:bookId' element={<SingleBook books={books}/>}/>
           <Route path='physics' element={<Physics />} />
           <Route path='*' element={<Error />} />
         </Route>

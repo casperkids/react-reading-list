@@ -1,12 +1,14 @@
 import { Link, useParams } from 'react-router-dom'
 import BookCard from '../components/BookCard.jsx'
 
-const SingleBook = ({ artBooks }) => { 
+const SingleBook = ({books}) => { 
     const { bookId } = useParams()
-    const book = artBooks.find(book => book.id === bookId)
+    const book = books.find(book => book.id === bookId)
     return (
         <div>
-            <h1>{book.title}</h1>
+            <h1>BOOK ID :{bookId}</h1>
+            <p>{book.lendingIdentifer}</p>
+            
             <Link to='/art'>Back to ArtBooks</Link>
         </div>
     );

@@ -8,7 +8,8 @@ export let books = [
      memo: 'cassiopeia, p3',
      haveRead: true,
      favorite:false,
-     id:11
+     id:'local_11',
+     lendingIdentifer : ''
     },
     {
     title : "Don't Sleep, There Are Snakes",
@@ -19,7 +20,8 @@ export let books = [
     memo: 'Life and Language in the Amazonian Jungle',
     haveRead: false,
     favorite:true,
-    id:12
+    id:'local_12',
+    lendingIdentifer : ''
     },
     {
     title : 'Lobo, the King of Currumpaw',
@@ -30,7 +32,8 @@ export let books = [
     favorite:false,
     haveRead: false,
     memo: 'wolf',
-    id:13
+    id:'local_13',
+    lendingIdentifer : ''
     },
     {
     title : 'About Face',
@@ -41,7 +44,8 @@ export let books = [
     haveRead: false,
     favorite:false,
     memo: 'The Essentials of Interaction Design',
-    id:14
+    id:'local_14',
+    lendingIdentifer : ''
     },
     {
     title : 'Wilder Mann',
@@ -52,6 +56,7 @@ export let books = [
     favorite:false,
     haveRead: false,
     memo: '',
-    id:15
+    id:'local_15',
+    lendingIdentifer : ''
     }
   ]

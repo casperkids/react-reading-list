@@ -12,7 +12,7 @@ const Art = ({ artBooks, toggleStatus, favoriteStatus }) => {
             {artBooks.map(book => {
                 return<article key={book.id}>
                 <h5>{book.title}</h5>
-                <Link to={`/art/${book.id.toString()}`}>more info</Link>
+                <Link to={`/art/`+book.id}>more info</Link>
                 </article>
             })}
             </div>

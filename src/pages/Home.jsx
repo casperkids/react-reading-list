@@ -7,7 +7,7 @@ const Home = ({ books, toggleStatus, favoriteStatus}) => {
 
         <div className="collection-list">
             <h3 className="text-center "style={{ paddingBottom: '60px' }}>ALL BOOKS</h3> 
-            {books.map(book => (<BookCard toggleStatus={toggleStatus} favoriteStatus={favoriteStatus} key={`${book.id.toString()}-${book.title}`} book={book}  />
+            {books.map(book => (<BookCard toggleStatus={toggleStatus} favoriteStatus={favoriteStatus} key={book.id} book={book}  />
             ))}
         </div>
       </div>  
