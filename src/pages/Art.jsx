@@ -3,24 +3,22 @@ import BookCard from '../components/BookCard.jsx'
 
 const Art = ({ artBooks, toggleStatus, favoriteStatus }) => { 
     
-    console.log(toggleStatus, favoriteStatus)
     return (
-        <>
-            <div>
-                <Link to='art' className='btn'>
-                    art
-                </Link>
-                <Link to='/' className='btn'>
-                    Home
-                </Link>
-                <h1>ART BOOKS</h1>
+        <div>
+           <h1>Single Book</h1>
             <div className="collection-list" >
-                {artBooks.map(book => (<BookCard toggleStatus={toggleStatus} favoriteStatus={favoriteStatus} key={`${book.id.toString()}-${book.title}`} book={book}/>
-            ))}
+                {/* {artBooks.map(book => (<BookCard toggleStatus={toggleStatus} favoriteStatus={favoriteStatus} key={`${book.id.toString()}-${book.title}`} book={book}/>
+            ))} */}
+            {artBooks.map(book => {
+                return<article key={book.id}>
+                <h5>{book.title}</h5>
+                <Link to={`/art/${book.id.toString()}`}>more info</Link>
+                </article>
+            })}
             </div>
         </div> 
-        <Outlet />
-        </>
+        
+
     );
 };
 

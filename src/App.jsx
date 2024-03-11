@@ -8,7 +8,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBookOpenReader, faBookmark, faHeart,faArrowUp } from '@fortawesome/free-solid-svg-icons'
 import Home from './pages/Home.jsx'
 import Art from './pages/Art.jsx'
-// import Physics from './pages/Physics.jsx'
+import Physics from './pages/Physics.jsx'
+import Error from './pages/Error.jsx'
+import SharedLayout from './pages/SharedLayout.jsx'
+import SingleBook from './pages/SingleBook.jsx'
 
 
 
@@ -59,7 +62,7 @@ function App() {
        let data = await response.json();
        let artBooksData = mapBookData(data.works)
        setArtBooks(artBooksData)
-      //  setArtBooks(data.works)
+
        // fetch physics
        let responsePhysics = await fetch('http://openlibrary.org/subjects/physics.json')
        let physicsData= await responsePhysics.json()
@@ -110,16 +113,17 @@ function App() {
 
   return (
     <BrowserRouter>
+      <nav>Out Navbar</nav>
       <Routes>
-        <Route path='/' element={<Home books={books} toggleStatus={toggleReadStatus} favoriteStatus={favoriteStatus} />} />
-        <Route path='art' element={<Art artBooks={artBooks} toggleStatus={toggleReadStatus} favoriteStatus={favoriteStatus} />} />
-        {/* <Route path='physics' element={<Physics physicsBooks={PhysicsBook} books={books} toggleStatus={toggleReadStatus} favoriteStatus={favoriteStatus} />} /> */}
-        <Route path='*' element={
-          <div>
-            <h1>This is * route</h1>
-          </div> 
-        } />
+        <Route path='/' element={<SharedLayout />} >
+          <Route index element={<Home books={books} toggleStatus={toggleReadStatus} favoriteStatus={favoriteStatus} />} />
+          <Route path='art' element={<Art artBooks={artBooks} toggleStatus={toggleReadStatus} favoriteStatus={favoriteStatus} />} />
+          <Route path='art/:bookId' element={<SingleBook/>}/>
+          <Route path='physics' element={<Physics />} />
+          <Route path='*' element={<Error />} />
+        </Route>
       </Routes>
+      <footer>our Footer</footer>
     </BrowserRouter>
   )
 }

@@ -68,3 +68,18 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+.navbar {
+  width: 90vw;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: flex;
+  gap: 1rem;
+}
+
+.link {
+  color: var(--grey-500);
+}
+
+.active {
+  color: var(--primary-500);
+}
