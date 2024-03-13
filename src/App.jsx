@@ -21,7 +21,7 @@ function App() {
 
   const [books, setBooks] = useState(booksData);
   const [artBooks, setArtBooks] = useState([]);
-  const [PhysicsBook, setPhysicsBookData] = useState([]);
+  const [physicsBooks, setPhysicsBookData] = useState([]);
   const [filmBooks, setFilmBookData] = useState([]);
   const [favSum, setFavSum] = useState(0)
   const [readSum, setReadSum] = useState(0)
@@ -48,7 +48,7 @@ function App() {
       title: book.title,
       authors: book.authors[0]?.name,
       year: book.first_publish_year?.toString() || "",
-      coverImage: `https://covers.openlibrary.org/b/id/${book.cover_id}-M.jpg`,
+      coverImage: book.cover_id ? `https://covers.openlibrary.org/b/id/${book.cover_id}-M.jpg` : 'src/bookpics/Default_book.jpg',
       description: "no description",
       haveRead: false,
       favorite: false,
@@ -120,9 +120,9 @@ function App() {
         <Routes>
         <Route path='/' element={<SharedLayout />} >
           <Route index element={<Home books={books} toggleStatus={toggleReadStatus} favoriteStatus={favoriteStatus} favSum={favSum} readSum={readSum} />}/>
-          <Route path='art' element={<Art artBooks={artBooks} toggleStatus={toggleReadStatus} favoriteStatus={favoriteStatus} />} />
-          <Route path='art/:bookId' element={<SingleBook books={books}/>}/>
-          <Route path='physics' element={<Physics />} />
+          <Route path='/:bookId' element={<SingleBook books={books} toggleStatus={toggleReadStatus} favoriteStatus={favoriteStatus}/>}/>
+          <Route path='art' element={<Art artBooks={artBooks} toggleStatus={toggleReadStatus} favoriteStatus={favoriteStatus} favSum={favSum} readSum={readSum}/>} />
+          <Route path='physics' element={<Physics physicsBooks={physicsBooks} toggleStatus={toggleReadStatus} favoriteStatus={favoriteStatus} favSum={favSum} readSum={readSum}/>} />
           <Route path='*' element={<Error />} />
         </Route>
       </Routes>

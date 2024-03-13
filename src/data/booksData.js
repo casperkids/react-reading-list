@@ -9,7 +9,7 @@ export let books = [
      haveRead: true,
      favorite:false,
      id:'local_11',
-     lendingIdentifer : ''
+     lendingIdentifer : 'none'
     },
     {
     title : "Don't Sleep, There Are Snakes",
@@ -21,7 +21,7 @@ export let books = [
     haveRead: false,
     favorite:true,
     id:'local_12',
-    lendingIdentifer : ''
+    lendingIdentifer : 'none'
     },
     {
     title : 'Lobo, the King of Currumpaw',
@@ -33,7 +33,7 @@ export let books = [
     haveRead: false,
     memo: 'wolf',
     id:'local_13',
-    lendingIdentifer : ''
+    lendingIdentifer : 'none'
     },
     {
     title : 'About Face',
@@ -45,7 +45,7 @@ export let books = [
     favorite:false,
     memo: 'The Essentials of Interaction Design',
     id:'local_14',
-    lendingIdentifer : ''
+    lendingIdentifer : 'none'
     },
     {
     title : 'Wilder Mann',
@@ -57,6 +57,6 @@ export let books = [
     haveRead: false,
     memo: '',
     id:'local_15',
-    lendingIdentifer : ''
+    lendingIdentifer : 'none'
     }
   ]
