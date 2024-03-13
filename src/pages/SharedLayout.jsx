@@ -4,7 +4,6 @@ import Navbar from '../components/Navbar.jsx'
 import StyledNavbar from '../components/StyledNavbar.jsx'
 
 const Home = ({ books, toggleStatus, favoriteStatus}) => {
-  console.log(toggleStatus, favoriteStatus)
   return (
     <>
       <StyledNavbar/>

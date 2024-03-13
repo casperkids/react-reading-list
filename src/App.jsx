@@ -12,6 +12,8 @@ import Physics from './pages/Physics.jsx'
 import Error from './pages/Error.jsx'
 import SharedLayout from './pages/SharedLayout.jsx'
 import SingleBook from './pages/SingleBook.jsx'
+import Navbar from './components/Navbar.jsx'
+
 
 
 
@@ -21,8 +23,8 @@ function App() {
   const [artBooks, setArtBooks] = useState([]);
   const [PhysicsBook, setPhysicsBookData] = useState([]);
   const [filmBooks, setFilmBookData] = useState([]);
-  // const [favSum, setFavSum] = useState(0)
-  // const [readSum, setReadSum] = useState(0)
+  const [favSum, setFavSum] = useState(0)
+  const [readSum, setReadSum] = useState(0)
 
   //add function to change state of book(haveRead: true or false)
   const toggleReadStatus = (id) => {
@@ -87,22 +89,22 @@ function App() {
      getBooksData()
     }, []);
 
-  // useEffect(() => {
-  //     const calculateFavSum = () => {
-  //       const favSum = books.filter(item => item.favorite === true).length
-  //       setFavSum(favSum)
-  //     };
-  //     calculateFavSum()
+  useEffect(() => {
+      const calculateFavSum = () => {
+        const favSum = books.filter(item => item.favorite === true).length
+        setFavSum(favSum)
+      };
+      calculateFavSum()
       
-  //     const calculateReadSum = () => {
-  //       const readSum = books.filter(item => item.haveRead === true).length
-  //       setReadSum(readSum)
-  //     };
-  //     calculateReadSum()
-  //   }, [books])
+      const calculateReadSum = () => {
+        const readSum = books.filter(item => item.haveRead === true).length
+        setReadSum(readSum)
+      };
+      calculateReadSum()
+    }, [books])
 
   
-  //  const totalBooks = books.length
+   
   
    const scrollToTop = () => {
     window.scrollTo({
@@ -114,10 +116,10 @@ function App() {
 
   return (
     <BrowserRouter>
-      <nav>Out Navbar</nav>
-      <Routes>
+      <nav ></nav>
+        <Routes>
         <Route path='/' element={<SharedLayout />} >
-          <Route index element={<Home books={books} toggleStatus={toggleReadStatus} favoriteStatus={favoriteStatus} />} />
+          <Route index element={<Home books={books} toggleStatus={toggleReadStatus} favoriteStatus={favoriteStatus} favSum={favSum} readSum={readSum} />}/>
           <Route path='art' element={<Art artBooks={artBooks} toggleStatus={toggleReadStatus} favoriteStatus={favoriteStatus} />} />
           <Route path='art/:bookId' element={<SingleBook books={books}/>}/>
           <Route path='physics' element={<Physics />} />
